@@ -2,10 +2,12 @@ import "./App.css";
 import { database } from "./firebase";
 import { set, ref, push, get, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function App() {
-  const [questionsObject, setQuestionsObject] = useState({});
-
+  // const [questionsObject, setQuestionsObject] = useState({});
+  const navigate = useNavigate();
+  const [questionsQueue, setQuestionsQueue] = useState([]);
   /*
   // Create initial testing questions
 
@@ -35,6 +37,7 @@ function App() {
       const data = snapshot.val();
       for (const [key, value] of Object.entries(data)) {
         console.log(key, value);
+        setQuestionsQueue((prev) => [...prev, key])
       }
     });
   }, []);
@@ -42,8 +45,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>Scam or Not</div>
+        <h1>Scam or Not</h1>
       </header>
+      <body>
+        <p>Some intro text, e.g. game rules</p>
+        <button onClick={() => {navigate(`/question/${questionsQueue[0]}`)}}>Start</button>
+      </body>
     </div>
   );
 }
