@@ -1,4 +1,5 @@
 import "./App.css";
+import logo from "./logo.svg";
 import { database } from "./firebase";
 import { set, ref, push, get, onValue } from "firebase/database";
 import { useEffect, useState } from "react";
@@ -44,13 +45,15 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Scam or Not</h1>
-      </header>
-      <body>
-        <p>Some intro text, e.g. game rules</p>
-        <button onClick={() => {navigate(`/question/${questionsQueue[0]}`)}}>Start</button>
-      </body>
+      <main className="Container">
+        <img className="Logo" src={logo} />
+        <div className="InfoText">
+          <p className="InfoText-paragraph">Help beat the scammers.</p>
+          <p className="InfoText-paragraph">Test and improve your ability to identify scams.</p>
+          <p className="InfoText-paragraph">Challenge your family and friends.</p>
+        </div>
+        <button className="Button" onClick={() => {navigate(`/question/${questionsQueue[0]}`)}}>Play</button>
+      </main>
     </div>
   );
 }
