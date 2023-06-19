@@ -3,12 +3,19 @@
   top: 0;
   left: 0;
   z-index: 1000;
-  background-color: rgb(0, 255, 85);
   height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.modal-overlay.correct {
+  background-color: rgb(0, 255, 85);
+}
+
+.modal-overlay.incorrect {
+  background-color: rgb(255, 8, 0);
 }
 
 .modal-content {

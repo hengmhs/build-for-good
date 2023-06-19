@@ -1,11 +1,14 @@
 import React from "react";
 import "./ScamModal.css";
 
-export default function ScamModal({ closeModal }) {
+export default function ScamModal({ closeModal, result }) {
+  const modalClass =
+    result === "correct" ? "modal-overlay correct" : "modal-overlay incorrect";
+
   return (
-    <div className="modal-overlay">
+    <div className={modalClass}>
       <div className="modal-content">
-        <div className="scam-advice">Scam advice here</div>
+        <div className="scam-advice">{result}</div>
 
         <div className="modal-close">
           <button onClick={closeModal}>Next</button>

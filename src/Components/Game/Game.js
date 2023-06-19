@@ -12,6 +12,7 @@ export default function Game() {
   const [roundQuestions, setRoundQuestions] = useState([]);
 
   const [isModalOpen, setModal] = useState(false);
+  const [result, setResult] = useState("");
 
   useEffect(() => {
     if (!questionBank || questionBank.length === 0) {
@@ -30,19 +31,6 @@ export default function Game() {
     }
   }, [questionIndex]);
 
-  const handleClick = (e) => {
-    const answer = e.currentTarget.id;
-    const isScam = roundQuestions[questionIndex].is_scam;
-    if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
-      console.log("Correct!");
-    } else {
-      console.log("Wrong!");
-    }
-    setQuestionIndex((prev) => prev + 1);
-    // Need to add logic for the final question -> to navigate to score page instead of opening the modal
-    setModalOpen();
-  };
-
   const setModalClose = () => {
     setModal(false);
   };
@@ -51,10 +39,25 @@ export default function Game() {
     setModal(true);
   };
 
+  const handleClick = (e) => {
+    const answer = e.currentTarget.id;
+    const isScam = roundQuestions[questionIndex].is_scam;
+
+    if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
+      setResult("correct");
+    } else {
+      setResult("incorrect");
+    }
+    setQuestionIndex((prev) => prev + 1);
+    setModalOpen();
+  };
+
   return (
     <div className="App">
       <main className="Container">
-        {isModalOpen && <ScamModal closeModal={setModalClose} />}
+        {isModalOpen && (
+          <ScamModal closeModal={setModalClose} result={result} />
+        )}
         <div className="Scam-Display">
           <Question content={roundQuestions[questionIndex]?.content} />
         </div>
