@@ -3,12 +3,16 @@ import useQuestionBank from "../../Hooks/useQuestionBank";
 import Question from "../Question/Question";
 import "../../App.css";
 import "./Game.css";
+import ScamModal from "./ScamModal";
 
 export default function Game() {
   const { questionBank } = useQuestionBank();
   const [roundNumber, setRoundNumber] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
+
+  const [isModalOpen, setModal] = useState(false);
+  const [result, setResult] = useState("");
 
   useEffect(() => {
     if (!questionBank || questionBank.length === 0) {
@@ -27,20 +31,33 @@ export default function Game() {
     }
   }, [questionIndex]);
 
+  const setModalClose = () => {
+    setModal(false);
+  };
+
+  const setModalOpen = () => {
+    setModal(true);
+  };
+
   const handleClick = (e) => {
     const answer = e.currentTarget.id;
     const isScam = roundQuestions[questionIndex].is_scam;
+
     if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
-      console.log("Correct!");
+      setResult("correct");
     } else {
-      console.log("Wrong!");
+      setResult("incorrect");
     }
     setQuestionIndex((prev) => prev + 1);
+    setModalOpen();
   };
 
   return (
     <div className="App">
       <main className="Container">
+        {isModalOpen && (
+          <ScamModal closeModal={setModalClose} result={result} />
+        )}
         <div className="Scam-Display">
           <Question content={roundQuestions[questionIndex]?.content} />
         </div>
