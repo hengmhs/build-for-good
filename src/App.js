@@ -1,5 +1,6 @@
 import "./App.css";
-import logo from "./logo.svg";
+import logo from "./scam-logo.svg";
+
 import { database } from "./firebase";
 import { set, ref, push, get, onValue } from "firebase/database";
 import { useEffect } from "react";
@@ -40,7 +41,7 @@ function App() {
     onValue(allQuestionsRef, (snapshot) => {
       const data = snapshot.val();
       for (const [key, value] of Object.entries(data)) {
-        setQuestionBank((prev) => [...prev, value])
+        setQuestionBank((prev) => [...prev, value]);
       }
     });
   }, []);
@@ -50,11 +51,18 @@ function App() {
       <main className="Container">
         <img className="Logo" src={logo} />
         <div className="InfoText">
-          <p className="InfoText-paragraph">Help beat the scammers.</p>
-          <p className="InfoText-paragraph">Test and improve your ability to identify scams.</p>
-          <p className="InfoText-paragraph">Challenge your family and friends.</p>
+          <p>Help beat the scammers.</p>
+          <p>Test and improve your ability to identify scams.</p>
+          <p>Challenge your family and friends.</p>
         </div>
-        <button className="Button" onClick={() => { navigate("game") }}>Play</button>
+        <button
+          className="Button"
+          onClick={() => {
+            navigate("game");
+          }}
+        >
+          Play
+        </button>
       </main>
     </div>
   );

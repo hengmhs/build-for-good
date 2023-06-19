@@ -1,0 +1,7 @@
+.Question {
+  background-color: rgb(217, 217, 217);
+  padding: 1rem;
+  border-radius: 10px;
+  width: fit-content;
+  max-width: 60%;
+}
