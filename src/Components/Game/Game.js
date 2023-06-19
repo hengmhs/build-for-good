@@ -11,6 +11,7 @@ export default function Game() {
   const [roundNumber, setRoundNumber] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
+  const [score, setScore] = useState(0);
 
   const [isModalOpen, setModal] = useState(false);
   const [result, setResult] = useState("");
@@ -45,6 +46,7 @@ export default function Game() {
     const isScam = roundQuestions[questionIndex].is_scam;
 
     if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
+      setScore(score + 1);
       setResult("correct");
     } else {
       setResult(`${answer} is incorrect`);
@@ -56,9 +58,9 @@ export default function Game() {
   return (
     <div className="App">
       <main className="Container">
-        <Header />
+        <Header score={score} />
         {isModalOpen && (
-          <ScamModal closeModal={setModalClose} result={result} />
+          <ScamModal closeModal={setModalClose} result={result} score={score} />
         )}
         <div className="Scam-Display">
           <Question content={roundQuestions[questionIndex]?.content} />
