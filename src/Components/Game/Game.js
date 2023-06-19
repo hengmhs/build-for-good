@@ -3,12 +3,15 @@ import useQuestionBank from "../../Hooks/useQuestionBank";
 import Question from "../Question/Question";
 import "../../App.css";
 import "./Game.css";
+import ScamModal from "./ScamModal";
 
 export default function Game() {
   const { questionBank } = useQuestionBank();
   const [roundNumber, setRoundNumber] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
+
+  const [isModalOpen, setModal] = useState(false);
 
   useEffect(() => {
     if (!questionBank || questionBank.length === 0) {
@@ -36,11 +39,22 @@ export default function Game() {
       console.log("Wrong!");
     }
     setQuestionIndex((prev) => prev + 1);
+    // Need to add logic for the final question -> to navigate to score page instead of opening the modal
+    setModalOpen();
+  };
+
+  const setModalClose = () => {
+    setModal(false);
+  };
+
+  const setModalOpen = () => {
+    setModal(true);
   };
 
   return (
     <div className="App">
       <main className="Container">
+        {isModalOpen && <ScamModal closeModal={setModalClose} />}
         <div className="Scam-Display">
           <Question content={roundQuestions[questionIndex]?.content} />
         </div>
