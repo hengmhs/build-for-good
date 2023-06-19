@@ -4,7 +4,7 @@ import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QuestionBankProvider } from "./Context/questionBankProvider";
 import App from "./App";
-import Game from "./Components/Game";
+import Game from "./Components/Game/Game";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

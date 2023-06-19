@@ -1,36 +1,74 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html,
+body,
+body #root,
+.App {
+  overflow: hidden;
+  height: 100%;
+}
+
 /*** Container ***/
 
 .Container {
+  height: 100%;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
-
 
 /*** Logo ***/
 
 .Logo {
   object-fit: contain;
-  width: 100%;
+  width: 80%;
 }
-
 
 /*** InfoText ***/
 
 .InfoText {
+  flex: 1;
   padding: 2rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 0.5rem;
 }
 
-.InfoText-paragraph {
+h4 {
+  font-size: 2rem;
+  line-height: 2em;
+}
+
+p {
   color: #404040;
   font-size: 1.25rem;
   font-weight: 500;
   line-height: 1.5em;
-  margin: 0.75rem 0;
 }
-
 
 /*** Buttons ***/
 
+.Buttons-Container {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+}
+
 .Button {
+  width: 100%;
   background-color: #175fd1;
   border: 0 none;
   border-radius: 0.5rem;
