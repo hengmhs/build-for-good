@@ -3,7 +3,6 @@ import good from "../../Images/good.svg";
 import bad from "../../Images/bad.svg";
 import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
-import Header from "../Header/Header";
 
 export default function ScamModal({ closeModal, result, score }) {
   const modalClass =
@@ -29,7 +28,7 @@ export default function ScamModal({ closeModal, result, score }) {
     resultDisplay = (
       <>
         <h1>Yay!</h1>
-        <div>Score: {score}</div>
+        <div>Current Score: {score}</div>
         <Fireworks {...fxProps} />
       </>
     );
@@ -38,7 +37,7 @@ export default function ScamModal({ closeModal, result, score }) {
       <>
         <img className="answer-image" src={bad} alt="Bad" />
         <h1>Oh no...</h1>
-        <div>Score: {score}</div>
+        <div>Current Score: {score}</div>
         <p>That was a scam!</p>
       </>
     );
@@ -47,6 +46,7 @@ export default function ScamModal({ closeModal, result, score }) {
       <>
         <img className="answer-image" src={good} alt="Good" />
         <h1>Whoops!</h1>
+        <div>Current Score: {score}</div>
         <p>That wasn't a scam!</p>
       </>
     );

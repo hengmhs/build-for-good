@@ -74,7 +74,7 @@ export default function Game() {
             Scam
           </button>
           <button className="Button Green" onClick={handleClick} id="not-scam">
-            Not a Scam
+            Not Scam
           </button>
         </div>
       </main>
