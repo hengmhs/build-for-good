@@ -55,7 +55,7 @@ export default function Game() {
 
   return (
     <div className="App">
-      <main className="Container">
+      <main className="Container Game">
         <Header />
         {isModalOpen && (
           <ScamModal closeModal={setModalClose} result={result} />
