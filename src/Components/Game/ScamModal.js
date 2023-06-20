@@ -4,6 +4,7 @@ import bad from "../../Images/bad.svg";
 import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
 import { useState } from "react";
+
 //import { database } from "../../firebase";
 //import { ref, onValue } from "firebase/database";
 
@@ -12,24 +13,11 @@ export default function ScamModal({
   result,
   score,
   questionCategory,
+  hints,
 }) {
   const [category, setCategory] = useState(null);
-  //const [advice, setAdvice] = useState(null);
-
-  /*
-  useEffect(() => {
-    if (!advice) {
-      const allAdviceRef = ref(database, "hints");
-      onValue(allAdviceRef, (snapshot) => {
-        const data = snapshot.val();
-        setAdvice(data);
-      });
-      console.log("setting advice to true - should only see this once");
-      setAdvice(true);
-    }
-    console.log("we see the element");
-  }, []);
-*/
+  const [warning, setWarning] = useState(null);
+  const [advice, setAdvice] = useState(null);
 
   // if questionCategory is null, not a a scam
   // else, questionCategory is an object with the category of the scam as the key
@@ -37,6 +25,11 @@ export default function ScamModal({
 
   useEffect(() => {
     if (questionCategory) {
+      const key = Object.keys(questionCategory)[0];
+      // Array of warnings
+      setWarning(hints[key].warning);
+      // Array of advice
+      setAdvice(hints[key].advice);
       const properNames = {
         "credit-for-sex": "Credit for Sex Scam",
         "e-commerce": "E-commerce Scam",
@@ -51,7 +44,7 @@ export default function ScamModal({
         survey: "Survey Scam",
       };
       // obtain the first key of questionCategory and get the proper name for it
-      setCategory(properNames[Object.keys(questionCategory)[0]]);
+      setCategory(properNames[key]);
     } else {
       setCategory(null);
     }
@@ -82,6 +75,26 @@ export default function ScamModal({
         <h1>Yay!</h1>
         <div>Current Score: {score}</div>
         {category && <div>Category: {category}</div>}
+        {warning && (
+          <div>
+            <h3>Warning Signs</h3>
+            <ol>
+              {warning.map((line) => {
+                return <li>{line}</li>;
+              })}
+            </ol>
+          </div>
+        )}
+        {advice && (
+          <div>
+            <h3>Advice</h3>
+            <ol>
+              {advice.map((line) => {
+                return <li>{line}</li>;
+              })}
+            </ol>
+          </div>
+        )}
         <Fireworks {...fxProps} />
       </>
     );
@@ -92,6 +105,26 @@ export default function ScamModal({
         <h1>Oh no...</h1>
         <div>Current Score: {score}</div>
         <div>Category: {category}</div>
+        {warning && (
+          <div>
+            <h3>Warning Signs</h3>
+            <ol>
+              {warning.map((line) => {
+                return <li>{line}</li>;
+              })}
+            </ol>
+          </div>
+        )}
+        {advice && (
+          <div>
+            <h3>Advice</h3>
+            <ol>
+              {advice.map((line) => {
+                return <li>{line}</li>;
+              })}
+            </ol>
+          </div>
+        )}
         <p>That was a scam!</p>
       </>
     );
