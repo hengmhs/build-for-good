@@ -8,13 +8,6 @@ const Header = ({ score }) => {
     <div className="Header">
       <img className="Logo" src={logo} alt="Scam or Not!" />
       <span>Score: {score}</span>
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Home
-      </button>
     </div>
   );
 };
