@@ -56,7 +56,10 @@ export default function Game() {
   return (
     <div className="App">
       <main className="Container Game">
-        <Header currentQuestion={questionIndex + 1} totalQuestions={roundQuestions.length} />
+        <Header
+          currentQuestion={questionIndex + 1}
+          totalQuestions={roundQuestions.length}
+        />
         {isModalOpen && (
           <ScamModal closeModal={setModalClose} result={result} score={score} />
         )}
@@ -71,7 +74,7 @@ export default function Game() {
             Scam
           </button>
           <button className="Button Green" onClick={handleClick} id="not-scam">
-            Not a Scam
+            Not Scam
           </button>
         </div>
       </main>
