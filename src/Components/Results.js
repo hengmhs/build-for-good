@@ -1,4 +1,4 @@
-import logo from "../logo.svg";
+import logo from "../Images/logo.svg";
 import { useNavigate } from "react-router-dom";
 
 function Results() {
@@ -12,7 +12,14 @@ function Results() {
           <p className="InfoText-paragraph">Your score</p>
           <p className="InfoText-paragraph">10/10</p>
         </div>
-        <button className="Button" onClick={() => { navigate("../game") }}>Try again</button>
+        <button
+          className="Button"
+          onClick={() => {
+            navigate("../game");
+          }}
+        >
+          Try again
+        </button>
       </main>
     </div>
   );

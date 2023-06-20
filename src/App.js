@@ -1,5 +1,5 @@
 import "./App.css";
-import logo from "./scam-logo.svg";
+import logo from "./Images/logo.svg";
 
 import { database } from "./firebase";
 import { set, ref, push, get, onValue } from "firebase/database";
@@ -25,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <main className="Container">
-        <img className="Logo" src={logo} />
+        <img className="Logo" src={logo} alt="Scam or not!" />
         <div className="InfoText">
           <p>Help beat the scammers.</p>
           <p>Test and improve your ability to identify scams.</p>
