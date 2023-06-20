@@ -4,8 +4,8 @@ import bad from "../../Images/bad.svg";
 import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
 import { useState } from "react";
-import { database } from "../../firebase";
-import { ref, onValue } from "firebase/database";
+//import { database } from "../../firebase";
+//import { ref, onValue } from "firebase/database";
 
 export default function ScamModal({
   closeModal,
@@ -14,7 +14,7 @@ export default function ScamModal({
   questionCategory,
 }) {
   const [category, setCategory] = useState(null);
-  const [advice, setAdvice] = useState(null);
+  //const [advice, setAdvice] = useState(null);
 
   /*
   useEffect(() => {
