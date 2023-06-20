@@ -56,7 +56,11 @@ export default function Game() {
   return (
     <div className="App">
       <main className="Container Game">
+<<<<<<< Updated upstream
         <Header />
+=======
+        <Header score={score} />
+>>>>>>> Stashed changes
         {isModalOpen && (
           <ScamModal closeModal={setModalClose} result={result} />
         )}
