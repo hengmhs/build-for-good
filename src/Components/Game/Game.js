@@ -63,7 +63,10 @@ export default function Game() {
           <ScamModal closeModal={setModalClose} result={result} score={score} />
         )}
         <div className="Scam-Display">
-          <Question content={roundQuestions[questionIndex]?.content} />
+          <Question
+            content={roundQuestions[questionIndex]?.content}
+            sender={roundQuestions[questionIndex]?.sender}
+          />
         </div>
         <div className="Buttons-Container">
           <button className="Button Red" onClick={handleClick} id="scam">
