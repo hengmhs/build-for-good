@@ -5,7 +5,7 @@ import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
 import Header from "../Header/Header";
 
-export default function ScamModal({ closeModal, result }) {
+export default function ScamModal({ closeModal, result, score }) {
   const modalClass =
     result === "correct" ? "modal-overlay correct" : "modal-overlay incorrect";
   const input = result.split(" ");
@@ -29,6 +29,7 @@ export default function ScamModal({ closeModal, result }) {
     resultDisplay = (
       <>
         <h1>Yay!</h1>
+        <div>Score: {score}</div>
         <Fireworks {...fxProps} />
       </>
     );
@@ -37,6 +38,7 @@ export default function ScamModal({ closeModal, result }) {
       <>
         <img className="answer-image" src={bad} alt="Bad" />
         <h1>Oh no...</h1>
+        <div>Score: {score}</div>
         <p>That was a scam!</p>
       </>
     );
