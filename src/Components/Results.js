@@ -1,8 +1,9 @@
 import logo from "../Images/logo.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 function Results() {
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   return (
     <div className="App">
@@ -10,7 +11,7 @@ function Results() {
         <img className="Logo" src={logo} />
         <div className="InfoText">
           <p className="InfoText-paragraph">Your score</p>
-          <p className="InfoText-paragraph">10/10</p>
+          <p className="InfoText-paragraph">{state.score}/5</p>
         </div>
         <button
           className="Button"

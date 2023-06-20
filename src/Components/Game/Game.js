@@ -31,7 +31,7 @@ export default function Game() {
   const setModalClose = () => {
     setModal(false);
     if (questionIndex === roundQuestions.length) {
-      navigate("../results");
+      navigate("../results", { state: { score: score } });
     }
   };
 
@@ -56,7 +56,10 @@ export default function Game() {
   return (
     <div className="App">
       <main className="Container Game">
-        <Header currentQuestion={questionIndex + 1} totalQuestions={roundQuestions.length} />
+        <Header
+          currentQuestion={questionIndex + 1}
+          totalQuestions={roundQuestions.length}
+        />
         {isModalOpen && (
           <ScamModal closeModal={setModalClose} result={result} score={score} />
         )}
