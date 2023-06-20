@@ -14,6 +14,7 @@ export default function Game() {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
   const [score, setScore] = useState(0);
+  const [questionCategory, setQuestionCategory] = useState(null);
 
   const [isModalOpen, setModal] = useState(false);
   const [result, setResult] = useState("");
@@ -43,6 +44,12 @@ export default function Game() {
     const answer = e.currentTarget.id;
     const isScam = roundQuestions[questionIndex].is_scam;
 
+    if (isScam) {
+      setQuestionCategory(roundQuestions[questionIndex].category);
+    } else {
+      setQuestionCategory(null);
+    }
+
     if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
       setScore(score + 1);
       setResult("correct");
@@ -61,7 +68,12 @@ export default function Game() {
           totalQuestions={roundQuestions.length}
         />
         {isModalOpen && (
-          <ScamModal closeModal={setModalClose} result={result} score={score} />
+          <ScamModal
+            closeModal={setModalClose}
+            result={result}
+            score={score}
+            questionCategory={questionCategory}
+          />
         )}
         <div className="Scam-Display">
           <Question
