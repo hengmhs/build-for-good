@@ -65,7 +65,8 @@ p {
 .Buttons-Container {
   display: flex;
   width: 100%;
-  gap: 2rem;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .Button {
