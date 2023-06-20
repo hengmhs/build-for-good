@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useQuestionBank from "../../Hooks/useQuestionBank";
 import Question from "../Question/Question";
 import "../../App.css";
@@ -7,6 +8,7 @@ import ScamModal from "./ScamModal";
 import Header from "../Header/Header";
 
 export default function Game() {
+  const navigate = useNavigate();
   const { questionBank } = useQuestionBank();
   const [roundNumber, setRoundNumber] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -26,15 +28,11 @@ export default function Game() {
     setRoundQuestions(currentRoundQuestions);
   }, [roundNumber, questionBank]);
 
-  useEffect(() => {
-    if (questionIndex === roundQuestions.length - 1) {
-      setRoundNumber((prev) => prev + 1);
-      setQuestionIndex(0);
-    }
-  }, [questionIndex]);
-
   const setModalClose = () => {
     setModal(false);
+    if (questionIndex === roundQuestions.length) {
+      navigate("../results");
+    }
   };
 
   const setModalOpen = () => {
