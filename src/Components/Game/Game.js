@@ -24,7 +24,7 @@ export default function Game() {
       (question) => question.bin_id === roundNumber
     );
     setRoundQuestions(currentRoundQuestions);
-  }, [roundNumber]);
+  }, [roundNumber, questionBank]);
 
   useEffect(() => {
     if (questionIndex === roundQuestions.length - 1) {
