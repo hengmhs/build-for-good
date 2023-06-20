@@ -4,6 +4,7 @@ import Question from "../Question/Question";
 import "../../App.css";
 import "./Game.css";
 import ScamModal from "./ScamModal";
+import Header from "../Header/Header";
 
 export default function Game() {
   const { questionBank } = useQuestionBank();
@@ -46,7 +47,7 @@ export default function Game() {
     if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
       setResult("correct");
     } else {
-      setResult("incorrect");
+      setResult(`${answer} is incorrect`);
     }
     setQuestionIndex((prev) => prev + 1);
     setModalOpen();
@@ -55,6 +56,7 @@ export default function Game() {
   return (
     <div className="App">
       <main className="Container">
+        <Header />
         {isModalOpen && (
           <ScamModal closeModal={setModalClose} result={result} />
         )}
