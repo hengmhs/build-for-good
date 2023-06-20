@@ -1,10 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import good from "../../Images/good.svg";
 import bad from "../../Images/bad.svg";
 import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
+import { useState } from "react";
+import { database } from "../../firebase";
+import { ref, onValue } from "firebase/database";
 
-export default function ScamModal({ closeModal, result, score }) {
+export default function ScamModal({
+  closeModal,
+  result,
+  score,
+  questionCategory,
+}) {
+  const [category, setCategory] = useState(null);
+  const [advice, setAdvice] = useState(null);
+
+  /*
+  useEffect(() => {
+    if (!advice) {
+      const allAdviceRef = ref(database, "hints");
+      onValue(allAdviceRef, (snapshot) => {
+        const data = snapshot.val();
+        setAdvice(data);
+      });
+      console.log("setting advice to true - should only see this once");
+      setAdvice(true);
+    }
+    console.log("we see the element");
+  }, []);
+*/
+
+  // if questionCategory is null, not a a scam
+  // else, questionCategory is an object with the category of the scam as the key
+  // e.g. questionCategory: {"e-commerce": true}
+
+  useEffect(() => {
+    if (questionCategory) {
+      const properNames = {
+        "credit-for-sex": "Credit for Sex Scam",
+        "e-commerce": "E-commerce Scam",
+        "govt-impersonation": "Government Impersonation Scam",
+        investment: "Investment Scam",
+        job: "Job Scam",
+        laundering: "Money Laundering Scam",
+        loan: "Loan Scam",
+        love: "Love Scam",
+        prize: "Prize Scam",
+        "social-media-impersonation": "Social Media Impersonation Scam",
+        survey: "Survey Scam",
+      };
+      // obtain the first key of questionCategory and get the proper name for it
+      setCategory(properNames[Object.keys(questionCategory)[0]]);
+    } else {
+      setCategory(null);
+    }
+  }, []);
+
   const modalClass =
     result === "correct" ? "modal-overlay correct" : "modal-overlay incorrect";
   const input = result.split(" ");
@@ -29,6 +81,7 @@ export default function ScamModal({ closeModal, result, score }) {
       <>
         <h1>Yay!</h1>
         <div>Current Score: {score}</div>
+        {category && <div>Category: {category}</div>}
         <Fireworks {...fxProps} />
       </>
     );
@@ -38,6 +91,7 @@ export default function ScamModal({ closeModal, result, score }) {
         <img className="answer-image" src={bad} alt="Bad" />
         <h1>Oh no...</h1>
         <div>Current Score: {score}</div>
+        <div>Category: {category}</div>
         <p>That was a scam!</p>
       </>
     );
