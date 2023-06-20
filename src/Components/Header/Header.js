@@ -7,13 +7,6 @@ const Header = () => {
   return (
     <div className="Header">
       <img className="Logo" src={logo} alt="Scam or Not!" />
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        Home
-      </button>
     </div>
   );
 };
