@@ -1,13 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import logo from "../../Images/logo-horz.svg";
 import "./Header.css";
 
-const Header = ({ score }) => {
-  const navigate = useNavigate();
+const Header = ({ currentQuestion, totalQuestions }) => {
   return (
     <div className="Header">
       <img className="Logo" src={logo} alt="Scam or Not!" />
-      <span>Score: {score}</span>
+      <span className="Progress">{currentQuestion} / {totalQuestions}</span>
     </div>
   );
 };
