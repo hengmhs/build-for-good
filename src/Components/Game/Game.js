@@ -58,7 +58,7 @@ export default function Game() {
   return (
     <div className="App">
       <main className="Container Game">
-        <Header score={score} />
+        <Header currentQuestion={questionIndex + 1} totalQuestions={roundQuestions.length} />
         {isModalOpen && (
           <ScamModal closeModal={setModalClose} result={result} score={score} />
         )}
