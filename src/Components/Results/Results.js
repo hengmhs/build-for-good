@@ -1,4 +1,6 @@
-import logo from "../Images/logo.svg";
+import logo from "../../Images/logo.svg";
+import "../../App.css";
+import "./Results.css";
 import { useNavigate, useLocation } from "react-router-dom";
 
 function Results() {
@@ -7,11 +9,15 @@ function Results() {
 
   return (
     <div className="App">
-      <main className="Container">
-        <img className="Logo" src={logo} />
+      <main className="Container Results">
+        <img className="Logo" src={logo} alt="Scam or Not" />
         <div className="InfoText">
-          <p className="InfoText-paragraph">Your score</p>
-          <p className="InfoText-paragraph">{state.score}/5</p>
+          <h4>Your score</h4>
+          <div className="score">
+            <h1>{state.score}</h1>
+            <h1 id="divider">/</h1>
+            <h1>5</h1>
+          </div>
         </div>
         <button
           className="Button"

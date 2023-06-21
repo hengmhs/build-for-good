@@ -7,11 +7,14 @@ function App() {
 
   return (
     <div className="App">
-      <main className="Container">
+      <main className="Container Splash">
         <img className="Logo" src={logo} alt="Scam or not!" />
         <div className="InfoText">
           <p>Help beat the scammers.</p>
-          <p>Test and improve your ability to identify scams.</p>
+          <p>
+            Test and improve your ability <br />
+            to identify scams.
+          </p>
           <p>Challenge your family and friends.</p>
         </div>
         <button

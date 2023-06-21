@@ -4,7 +4,7 @@ export default function Question({ content, sender }) {
   return (
     <div className="Pseudo-Phone">
       <div className="CallerID">
-        <h4>{sender}</h4>
+        <h3>{sender}</h3>
       </div>
       <div className="Messages">
         <div className="Question">{content}</div>

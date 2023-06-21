@@ -11,6 +11,12 @@
   align-items: center;
 }
 
+@media (max-width: 500px) {
+  .Scam-Display {
+    padding: 0;
+  }
+}
+
 .Red {
   background-color: rgb(217, 70, 70);
 }

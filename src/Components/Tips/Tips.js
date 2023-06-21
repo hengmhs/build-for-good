@@ -8,7 +8,6 @@ const Tips = ({ warning, advice }) => {
 
     return (
       <div className="tip-box">
-        <h4>Tip:</h4>
         <p>{tip}</p>
       </div>
     );

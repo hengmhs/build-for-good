@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
 }
 
 html,
@@ -13,20 +13,50 @@ body #root,
 .App {
   overflow: hidden;
   height: 100%;
+  font-family: "Space Grotesk", sans-serif;
+  background-color: rgb(28, 28, 28);
+}
+
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*** Container ***/
 
 .Container {
   height: 100%;
+  width: 100%;
   max-width: 500px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-height: 1000px;
+  margin: 20px;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+/* .Splash {
+  background-color: #922a2a;
+} */
+
+@media (max-width: 500px) {
+  .Container {
+    margin: 0;
+    border-radius: 0rem;
+  }
+}
+
+@media (max-height: 1000px) {
+  .Container {
+    margin: 0;
+    border-radius: 0rem;
+  }
 }
 
 /*** Logo ***/
@@ -35,13 +65,14 @@ body #root,
   object-fit: contain;
   width: 80%;
   min-height: 10%;
+  margin-top: 3rem;
 }
 
 /*** InfoText ***/
 
 .InfoText {
   flex: 1;
-  padding: 2rem 0;
+  padding: 2rem 2rem;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -51,7 +82,7 @@ body #root,
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 5rem;
 }
 
 h3 {
@@ -66,11 +97,19 @@ h4 {
   line-height: 2em;
 }
 
+h5 {
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  line-height: 2em;
+}
+
 p {
   color: #404040;
   font-size: 1.25rem;
   font-weight: 500;
-  line-height: 1.5em;
+  line-height: 1.4em;
+  margin: 0.2em;
 }
 
 /*** Buttons ***/
@@ -83,6 +122,7 @@ p {
 }
 
 .Button {
+  font-family: "Space Grotesk", sans-serif;
   width: 100%;
   background-color: #175fd1;
   border: 0 none;
@@ -93,6 +133,7 @@ p {
   font-weight: 600;
   margin: 0 auto;
   padding: 1rem 1.5rem;
+  cursor: pointer;
 }
 
 @media (max-width: 500px) {
