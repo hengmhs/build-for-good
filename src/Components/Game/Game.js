@@ -50,8 +50,6 @@ export default function Game() {
   const handleClick = (e) => {
     const answer = e.currentTarget.id;
     const isScam = roundQuestions[questionIndex].is_scam;
-    const attemptCount = roundQuestions[questionIndex]["num_users_attempted"];
-    const correctCount = roundQuestions[questionIndex]["num_users_correct"];
     const key = questionIDs[questionIndex];
 
     if (isScam) {
@@ -63,10 +61,10 @@ export default function Game() {
     if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
       setScore(score + 1);
       setResult("correct");
-      updateCount(key, attemptCount, correctCount, true);
+      updateCount(key, true);
     } else {
       setResult(`${answer} is incorrect`);
-      updateCount(key, attemptCount, correctCount, false);
+      updateCount(key, false);
     }
     setQuestionIndex((prev) => prev + 1);
     setModalOpen();
