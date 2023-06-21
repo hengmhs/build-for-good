@@ -19,7 +19,6 @@
   justify-content: center;
   gap: 2rem;
   flex: 1;
-  /* background-color: rgb(241, 241, 241); */
   height: 100%;
   width: 100%;
   border-radius: 0.5rem;
@@ -38,4 +37,14 @@
   color: Black;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   transition: all 0.3s ease;
+}
+
+@media (max-width: 500px) {
+  .modal-content {
+    gap: 1rem;
+  }
+
+  .answer-image {
+    height: 20%;
+  }
 }

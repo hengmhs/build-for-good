@@ -6,6 +6,10 @@
   padding-bottom: 3rem;
 }
 
+.score h1 {
+  font-size: 5rem;
+}
+
 #divider {
   font-size: 4rem;
   font-weight: 900;
