@@ -11,10 +11,9 @@ export default function useQuestionBank() {
     if (questionBank.length === 0) {
       const allQuestionsRef = ref(database, "questions");
 
-      get(allQuestionsRef)
+      allQuestionsRef
         .then((snapshot) => {
           if (snapshot.exists()) {
-            console.log("GET ONCE : ", snapshot.val());
             const data = snapshot.val();
 
             for (const [key, value] of Object.entries(data)) {
@@ -44,31 +43,6 @@ export default function useQuestionBank() {
         .catch((error) => {
           console.error(error);
         });
-
-      // onValue(allQuestionsRef, (snapshot) => {
-      //   const data = snapshot.val();
-
-      //   for (const [key, value] of Object.entries(data)) {
-      //     setQuestionBank((prev) => [...prev, value]);
-      //   }
-
-      //   const keyValueArray = Object.entries(data);
-      //   const questionKeyArray = keyValueArray.reduce(
-      //     (result, [key, value]) => {
-      //       const binId = value.bin_id;
-
-      //       if (!result[binId]) {
-      //         result[binId] = [];
-      //       }
-
-      //       result[binId].push(key);
-      //       return result;
-      //     },
-      //     []
-      //   );
-
-      //   setQuestionID(questionKeyArray);
-      // });
     }
   }, []);
 
