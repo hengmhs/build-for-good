@@ -5,6 +5,7 @@ import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
 import { useState } from "react";
 import Tips from "../Tips/Tips";
+import CategoryTag from "../CategoryTag/CategoryTag";
 
 //import { database } from "../../firebase";
 //import { ref, onValue } from "firebase/database";
@@ -19,6 +20,7 @@ export default function ScamModal({
   const [category, setCategory] = useState(null);
   const [warning, setWarning] = useState(null);
   const [advice, setAdvice] = useState(null);
+  const [firework, setFirework] = useState(null);
 
   // if questionCategory is null, not a a scam
   // else, questionCategory is an object with the category of the scam as the key
@@ -51,33 +53,38 @@ export default function ScamModal({
     }
   }, []);
 
-  const modalClass =
-    result === "correct" ? "modal-overlay correct" : "modal-overlay incorrect";
-  const input = result.split(" ");
+  useEffect(() => {
+    const fxProps = {
+      count: 5,
+      // interval: 1500,
+      colors: ["#cc3333", "#4CAF50", "#81C784"],
+      calc: (props, i) => {
+        return {
+          ...props,
+          x: Math.random(window.outerWidth) * (i * 200) + window.innerWidth / 4,
+          y:
+            Math.random(window.outerHeight) * (i * 300) + window.innerWidth / 4,
+        };
+      },
+    };
+    setFirework(<Fireworks {...fxProps} />);
+  }, [result]);
 
-  let fxProps = {
-    count: 5,
-    // interval: 1500,
-    colors: ["#cc3333", "#4CAF50", "#81C784"],
-    calc: (props, i) => {
-      return {
-        ...props,
-        x: Math.random(window.outerWidth) * (i * 200) + window.innerWidth / 4,
-        y: Math.random(window.outerHeight) * (i * 300) + window.innerWidth / 4,
-      };
-    },
-  };
+  const modalClass =
+    result === "correct"
+      ? "Container modal-overlay correct"
+      : "Container modal-overlay incorrect";
+  const input = result.split(" ");
 
   let resultDisplay;
 
   if (result === "correct") {
     resultDisplay = (
       <>
-        <h1>Yay!</h1>
-        <div>Current Score: {score}</div>
-        {category && <div>Category: {category}</div>}
+        <h1>Correct!</h1>
+        <CategoryTag category={category} />
         <Tips warning={warning} advice={advice} />
-        <Fireworks {...fxProps} />
+        {firework}
       </>
     );
   } else if (input[0] === "not-scam") {
@@ -85,10 +92,8 @@ export default function ScamModal({
       <>
         <img className="answer-image" src={bad} alt="Bad" />
         <h1>Oh no...</h1>
-        <div>Current Score: {score}</div>
-        <div>Category: {category}</div>
+        <CategoryTag category={category} />
         <Tips warning={warning} advice={advice} />
-        <p>That was a scam!</p>
       </>
     );
   } else if (input[0] === "scam") {
@@ -96,7 +101,6 @@ export default function ScamModal({
       <>
         <img className="answer-image" src={good} alt="Good" />
         <h1>Whoops!</h1>
-        <div>Current Score: {score}</div>
         <p>That wasn't a scam!</p>
       </>
     );

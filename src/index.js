@@ -6,7 +6,7 @@ import { QuestionBankProvider } from "./Context/questionBankProvider";
 import { HintsProvider } from "./Context/hintsProvider";
 import App from "./App";
 import Game from "./Components/Game/Game";
-import Results from "./Components/Results";
+import Results from "./Components/Results/Results";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

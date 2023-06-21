@@ -1,0 +1,18 @@
+.score {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 3rem;
+}
+
+#divider {
+  font-size: 4rem;
+  font-weight: 900;
+  padding-bottom: 1rem;
+}
+
+.Results .Logo {
+  height: 2rem;
+  margin-top: 1rem;
+}
