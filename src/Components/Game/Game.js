@@ -63,10 +63,10 @@ export default function Game() {
     if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
       setScore(score + 1);
       setResult("correct");
-      // updateCount(key, attemptCount, correctCount, true);
+      updateCount(key, attemptCount, correctCount, true);
     } else {
       setResult(`${answer} is incorrect`);
-      // updateCount(key, attemptCount, correctCount, false);
+      updateCount(key, attemptCount, correctCount, false);
     }
     setQuestionIndex((prev) => prev + 1);
     setModalOpen();

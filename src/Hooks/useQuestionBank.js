@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react";
 import QuestionBankContext from "../Context/questionBankProvider";
 import { database } from "../firebase";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, get, child } from "firebase/database";
 
 export default function useQuestionBank() {
   const { questionBank, setQuestionBank, setQuestionID } =
@@ -10,30 +10,65 @@ export default function useQuestionBank() {
   useEffect(() => {
     if (questionBank.length === 0) {
       const allQuestionsRef = ref(database, "questions");
-      onValue(allQuestionsRef, (snapshot) => {
-        const data = snapshot.val();
 
-        for (const [key, value] of Object.entries(data)) {
-          setQuestionBank((prev) => [...prev, value]);
-        }
+      get(allQuestionsRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log("GET ONCE : ", snapshot.val());
+            const data = snapshot.val();
 
-        const keyValueArray = Object.entries(data);
-        const questionKeyArray = keyValueArray.reduce(
-          (result, [key, value]) => {
-            const binId = value.bin_id;
-
-            if (!result[binId]) {
-              result[binId] = [];
+            for (const [key, value] of Object.entries(data)) {
+              setQuestionBank((prev) => [...prev, value]);
             }
 
-            result[binId].push(key);
-            return result;
-          },
-          []
-        );
+            const keyValueArray = Object.entries(data);
+            const questionKeyArray = keyValueArray.reduce(
+              (result, [key, value]) => {
+                const binId = value.bin_id;
 
-        setQuestionID(questionKeyArray);
-      });
+                if (!result[binId]) {
+                  result[binId] = [];
+                }
+
+                result[binId].push(key);
+                return result;
+              },
+              []
+            );
+
+            setQuestionID(questionKeyArray);
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      // onValue(allQuestionsRef, (snapshot) => {
+      //   const data = snapshot.val();
+
+      //   for (const [key, value] of Object.entries(data)) {
+      //     setQuestionBank((prev) => [...prev, value]);
+      //   }
+
+      //   const keyValueArray = Object.entries(data);
+      //   const questionKeyArray = keyValueArray.reduce(
+      //     (result, [key, value]) => {
+      //       const binId = value.bin_id;
+
+      //       if (!result[binId]) {
+      //         result[binId] = [];
+      //       }
+
+      //       result[binId].push(key);
+      //       return result;
+      //     },
+      //     []
+      //   );
+
+      //   setQuestionID(questionKeyArray);
+      // });
     }
   }, []);
 
