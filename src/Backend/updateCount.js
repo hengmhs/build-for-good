@@ -10,5 +10,4 @@ export const updateCount = (key, attempt, correct, result) => {
   };
   const path = `/questions/${key}/`;
   update(ref(database, path), postData);
-  console.log("Update attempt", key);
 };
