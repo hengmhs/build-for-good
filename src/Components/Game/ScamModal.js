@@ -5,6 +5,7 @@ import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
 import { useState } from "react";
 import Tips from "../Tips/Tips";
+import CategoryTag from "../CategoryTag/CategoryTag";
 
 //import { database } from "../../firebase";
 //import { ref, onValue } from "firebase/database";
@@ -75,7 +76,7 @@ export default function ScamModal({
       <>
         <h1>Yay!</h1>
         <div>Current Score: {score}</div>
-        {category && <div>Category: {category}</div>}
+        <CategoryTag category={category} />
         <Tips warning={warning} advice={advice} />
         <Fireworks {...fxProps} />
       </>
