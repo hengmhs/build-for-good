@@ -7,16 +7,18 @@ import "../../App.css";
 import "./Game.css";
 import ScamModal from "./ScamModal";
 import Header from "../Header/Header";
+import { updateCount } from "../../Backend/updateCount";
 
 export default function Game() {
   const navigate = useNavigate();
-  const { questionBank } = useQuestionBank();
+  const { questionBank, questionID } = useQuestionBank();
   const { hints } = useHints();
   const [roundNumber, setRoundNumber] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
   const [score, setScore] = useState(0);
   const [questionCategory, setQuestionCategory] = useState(null);
+  const [questionIDs, setQuestionIDs] = useState([]);
 
   const [isModalOpen, setModal] = useState(false);
   const [result, setResult] = useState("");
@@ -28,6 +30,9 @@ export default function Game() {
     const currentRoundQuestions = questionBank.filter(
       (question) => question.bin_id === roundNumber
     );
+
+    const questionKey = questionID[roundNumber];
+    setQuestionIDs(questionKey);
     setRoundQuestions(currentRoundQuestions);
   }, [roundNumber, questionBank]);
 
@@ -45,6 +50,7 @@ export default function Game() {
   const handleClick = (e) => {
     const answer = e.currentTarget.id;
     const isScam = roundQuestions[questionIndex].is_scam;
+    const key = questionIDs[questionIndex];
 
     if (isScam) {
       setQuestionCategory(roundQuestions[questionIndex].category);
@@ -55,8 +61,10 @@ export default function Game() {
     if ((isScam && answer === "scam") || (!isScam && answer === "not-scam")) {
       setScore(score + 1);
       setResult("correct");
+      updateCount(key, true);
     } else {
       setResult(`${answer} is incorrect`);
+      updateCount(key, false);
     }
     setQuestionIndex((prev) => prev + 1);
     setModalOpen();
