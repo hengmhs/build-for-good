@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useQuestionBank from "../../Hooks/useQuestionBank";
+import useHints from "../../Hooks/useHints";
 import Question from "../Question/Question";
 import "../../App.css";
 import "./Game.css";
@@ -10,6 +11,7 @@ import Header from "../Header/Header";
 export default function Game() {
   const navigate = useNavigate();
   const { questionBank } = useQuestionBank();
+  const { hints } = useHints();
   const [roundNumber, setRoundNumber] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
@@ -73,6 +75,7 @@ export default function Game() {
             result={result}
             score={score}
             questionCategory={questionCategory}
+            hints={hints}
           />
         )}
         <div className="Scam-Display">
