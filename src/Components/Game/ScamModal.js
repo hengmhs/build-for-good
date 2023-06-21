@@ -4,6 +4,7 @@ import bad from "../../Images/bad.svg";
 import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
 import { useState } from "react";
+import Tips from "../Tips/Tips";
 
 //import { database } from "../../firebase";
 //import { ref, onValue } from "firebase/database";
@@ -75,26 +76,7 @@ export default function ScamModal({
         <h1>Yay!</h1>
         <div>Current Score: {score}</div>
         {category && <div>Category: {category}</div>}
-        {warning && (
-          <div>
-            <h3>Warning Signs</h3>
-            <ol>
-              {warning.map((line) => {
-                return <li>{line}</li>;
-              })}
-            </ol>
-          </div>
-        )}
-        {advice && (
-          <div>
-            <h3>Advice</h3>
-            <ol>
-              {advice.map((line) => {
-                return <li>{line}</li>;
-              })}
-            </ol>
-          </div>
-        )}
+        <Tips warning={warning} advice={advice} />
         <Fireworks {...fxProps} />
       </>
     );
@@ -105,26 +87,7 @@ export default function ScamModal({
         <h1>Oh no...</h1>
         <div>Current Score: {score}</div>
         <div>Category: {category}</div>
-        {warning && (
-          <div>
-            <h3>Warning Signs</h3>
-            <ol>
-              {warning.map((line) => {
-                return <li>{line}</li>;
-              })}
-            </ol>
-          </div>
-        )}
-        {advice && (
-          <div>
-            <h3>Advice</h3>
-            <ol>
-              {advice.map((line) => {
-                return <li>{line}</li>;
-              })}
-            </ol>
-          </div>
-        )}
+        <Tips warning={warning} advice={advice} />
         <p>That was a scam!</p>
       </>
     );
