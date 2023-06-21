@@ -11,7 +11,7 @@ export default function useQuestionBank() {
     if (questionBank.length === 0) {
       const allQuestionsRef = ref(database, "questions");
 
-      allQuestionsRef
+      get(allQuestionsRef)
         .then((snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val();
