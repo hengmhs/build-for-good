@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import good from "../../Images/good.svg";
 import bad from "../../Images/bad.svg";
 import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Tips from "../Tips/Tips";
 import CategoryTag from "../CategoryTag/CategoryTag";
 
@@ -21,6 +21,9 @@ export default function ScamModal({
   const [warning, setWarning] = useState(null);
   const [advice, setAdvice] = useState(null);
   const [firework, setFirework] = useState(null);
+
+  // fireworks alignment variables
+  const refContainer = useRef();
 
   // if questionCategory is null, not a a scam
   // else, questionCategory is an object with the category of the scam as the key
@@ -54,16 +57,27 @@ export default function ScamModal({
   }, []);
 
   useEffect(() => {
+    // get the height and width of the modal itself
+    const modalWidth = refContainer.current.getBoundingClientRect().width;
+    const modalHeight = refContainer.current.getBoundingClientRect().height;
+
+    // console.log("modalWidth: ", modalWidth);
+    // console.log("modalHeight: ", modalHeight);
+
+    // create a margin so fireworks don't appear at the left and right edge
+    const modalWidthMargin = 0.1 * modalWidth;
+
     const fxProps = {
       count: 5,
       // interval: 1500,
       colors: ["#cc3333", "#4CAF50", "#81C784"],
-      calc: (props, i) => {
+      calc: (props) => {
         return {
           ...props,
-          x: Math.random(window.outerWidth) * (i * 200) + window.innerWidth / 4,
-          y:
-            Math.random(window.outerHeight) * (i * 300) + window.innerWidth / 4,
+          x:
+            modalWidthMargin +
+            Math.max(Math.random() * (modalWidth - 2 * modalWidthMargin), 0),
+          y: Math.random() * modalHeight,
         };
       },
     };
@@ -107,7 +121,7 @@ export default function ScamModal({
   }
 
   return (
-    <div className={modalClass}>
+    <div className={modalClass} ref={refContainer}>
       {/* <Header /> */}
       <div className="modal-content">{resultDisplay}</div>
       <button className="Button" onClick={closeModal}>
