@@ -86,9 +86,11 @@ export default function ScamModal({
       <>
         <h1>Correct!</h1>
         <CategoryTag category={category} />
-        {hint && <div className="tip-box">
-          <p>{hint}</p>
-        </div>}
+        {hint && (
+          <div className="tip-box">
+            <p>⚠️ {hint}</p>
+          </div>
+        )}
         {firework}
       </>
     );
@@ -99,7 +101,7 @@ export default function ScamModal({
         <h1>Oh no...</h1>
         <CategoryTag category={category} />
         <div className="tip-box">
-          <p>{hint}</p>
+          <p>⚠️ {hint}</p>
         </div>
       </>
     );
