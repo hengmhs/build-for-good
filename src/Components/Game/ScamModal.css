@@ -48,3 +48,17 @@
     height: 20%;
   }
 }
+
+.tip-box {
+  background-color: rgb(225, 225, 225);
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  margin: 1rem;
+}
+
+@media (max-width: 500px) {
+  .tip-box {
+    padding: 1rem;
+  }
+}

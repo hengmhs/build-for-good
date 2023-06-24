@@ -81,9 +81,8 @@ export default function Game() {
           <ScamModal
             closeModal={setModalClose}
             result={result}
-            score={score}
             questionCategory={questionCategory}
-            hints={hints}
+            hint={roundQuestions[questionIndex - 1].hint}
           />
         )}
         <div className="Scam-Display">

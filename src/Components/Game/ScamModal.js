@@ -4,7 +4,6 @@ import bad from "../../Images/bad.svg";
 import "./ScamModal.css";
 import { Fireworks } from "fireworks/lib/react";
 import { useState, useRef, useEffect } from "react";
-import Tips from "../Tips/Tips";
 import CategoryTag from "../CategoryTag/CategoryTag";
 
 //import { database } from "../../firebase";
@@ -13,13 +12,10 @@ import CategoryTag from "../CategoryTag/CategoryTag";
 export default function ScamModal({
   closeModal,
   result,
-  score,
   questionCategory,
-  hints,
+  hint,
 }) {
   const [category, setCategory] = useState(null);
-  const [warning, setWarning] = useState(null);
-  const [advice, setAdvice] = useState(null);
   const [firework, setFirework] = useState(null);
 
   // fireworks alignment variables
@@ -32,10 +28,6 @@ export default function ScamModal({
   useEffect(() => {
     if (questionCategory) {
       const key = Object.keys(questionCategory)[0];
-      // Array of warnings
-      setWarning(hints[key].warning);
-      // Array of advice
-      setAdvice(hints[key].advice);
       const properNames = {
         "credit-for-sex": "Credit for Sex Scam",
         "e-commerce": "E-commerce Scam",
@@ -60,9 +52,6 @@ export default function ScamModal({
     // get the height and width of the modal itself
     const modalWidth = refContainer.current.getBoundingClientRect().width;
     const modalHeight = refContainer.current.getBoundingClientRect().height;
-
-    // console.log("modalWidth: ", modalWidth);
-    // console.log("modalHeight: ", modalHeight);
 
     // create a margin so fireworks don't appear at the left and right edge
     const modalWidthMargin = 0.1 * modalWidth;
@@ -97,7 +86,9 @@ export default function ScamModal({
       <>
         <h1>Correct!</h1>
         <CategoryTag category={category} />
-        <Tips warning={warning} advice={advice} />
+        {hint && <div className="tip-box">
+          <p>{hint}</p>
+        </div>}
         {firework}
       </>
     );
@@ -107,7 +98,9 @@ export default function ScamModal({
         <img className="answer-image" src={bad} alt="Bad" />
         <h1>Oh no...</h1>
         <CategoryTag category={category} />
-        <Tips warning={warning} advice={advice} />
+        <div className="tip-box">
+          <p>{hint}</p>
+        </div>
       </>
     );
   } else if (input[0] === "scam") {
