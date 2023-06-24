@@ -13,7 +13,8 @@ export default function Game() {
   const navigate = useNavigate();
   const { questionBank, questionID } = useQuestionBank();
   const { hints } = useHints();
-  const [roundNumber, setRoundNumber] = useState(1);
+  // const [roundNumber, setRoundNumber] = useState(1);
+  const [questionBinNum, setQuestionBinNum] = useState(1);
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
   const [score, setScore] = useState(0);
@@ -27,14 +28,20 @@ export default function Game() {
     if (!questionBank || questionBank.length === 0) {
       return;
     }
+    const num_of_bins = Math.ceil(questionBank.length / 5);
+    const randNum = Math.floor(Math.random() * num_of_bins + 1);
+    setQuestionBinNum(randNum);
+  }, [questionBank]);
+
+  useEffect(() => {
     const currentRoundQuestions = questionBank.filter(
-      (question) => question.bin_id === roundNumber
+      (question) => question.bin_id === questionBinNum
     );
 
-    const questionKey = questionID[roundNumber];
+    const questionKey = questionID[questionBinNum];
     setQuestionIDs(questionKey);
     setRoundQuestions(currentRoundQuestions);
-  }, [roundNumber, questionBank]);
+  }, [questionBinNum, questionBank]);
 
   const setModalClose = () => {
     setModal(false);
