@@ -1,4 +1,5 @@
 import logo from "../../Images/logo.svg";
+import shareIcon from "../../Images/share.svg"
 import "../../App.css";
 import "./Results.css";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -19,6 +20,10 @@ function Results() {
             <h1>5</h1>
           </div>
         </div>
+        <button className="Button">
+          <img src={shareIcon} alt="" className="Icon" />
+          Share
+        </button>
         <button
           className="Button"
           onClick={() => {
