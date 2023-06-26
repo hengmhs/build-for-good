@@ -116,6 +116,11 @@ p {
   margin: 0.2em;
 }
 
+.toastBody {
+  font-family: "Space Grotesk", sans-serif !important;
+  font-weight: 500;
+}
+
 @media (max-width: 500px) {
   h1 {
     font-size: 3.5rem;

@@ -29,7 +29,14 @@ function Results() {
             <h1>{MAX_SCORE}</h1>
           </div>
         </div>
-        <ToastContainer position="bottom-center" autoClose={1500} hideProgressBar pauseOnFocusLoss={false} pauseOnHover={false} />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={1500}
+          hideProgressBar
+          pauseOnFocusLoss={false}
+          pauseOnHover={false}
+          bodyClassName="toastBody"
+        />
         <button className="Button" onClick={handleShare}>
           <img src={shareIcon} alt="" className="Icon" />
           Share
