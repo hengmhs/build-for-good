@@ -8,6 +8,8 @@ import "./Game.css";
 import ScamModal from "./ScamModal";
 import Header from "../Header/Header";
 import { updateCount } from "../../Backend/updateCount";
+import duolingoCorrect from "../../Audio/duolingo-correct.mp3";
+import duolingoIncorrect from "../../Audio/duolingo-wrong.mp3";
 
 export default function Game() {
   const navigate = useNavigate();
@@ -23,6 +25,9 @@ export default function Game() {
 
   const [isModalOpen, setModal] = useState(false);
   const [result, setResult] = useState("");
+
+  const correctAudio = new Audio(duolingoCorrect);
+  const incorrectAudio = new Audio(duolingoIncorrect);
 
   useEffect(() => {
     if (binArray.length === 0) {
@@ -79,7 +84,9 @@ export default function Game() {
       setScore(score + 1);
       setResult("correct");
       updateCount(key, true);
+      correctAudio.play();
     } else {
+      incorrectAudio.play();
       setResult(`${answer} is incorrect`);
       updateCount(key, false);
     }
