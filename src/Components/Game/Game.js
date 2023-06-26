@@ -11,10 +11,10 @@ import { updateCount } from "../../Backend/updateCount";
 
 export default function Game() {
   const navigate = useNavigate();
-  const { questionBank, questionID } = useQuestionBank();
+  const { questionBank, questionID, binArray, remainBins, setRemainBin } =
+    useQuestionBank();
   const { hints } = useHints();
-  // const [roundNumber, setRoundNumber] = useState(1);
-  const [questionBinNum, setQuestionBinNum] = useState(1);
+  const [questionBinNum, setQuestionBinNum] = useState();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
   const [score, setScore] = useState(0);
@@ -25,15 +25,25 @@ export default function Game() {
   const [result, setResult] = useState("");
 
   useEffect(() => {
-    if (!questionBank || questionBank.length === 0) {
+    if (binArray.length === 0) {
       return;
     }
-    const num_of_bins = Math.ceil(questionBank.length / 5);
-    const randNum = Math.floor(Math.random() * num_of_bins + 1);
-    setQuestionBinNum(randNum);
+
+    let arr = remainBins.length === 0 ? [...binArray] : [...remainBins];
+
+    const randIndex = Math.floor(Math.random() * arr.length);
+    const curr_bin_id = arr[randIndex];
+    arr.splice(randIndex, 1);
+
+    setQuestionBinNum(curr_bin_id);
+    setRemainBin(arr);
   }, [questionBank]);
 
   useEffect(() => {
+    if (!questionBank || questionBank.length === 0) {
+      return;
+    }
+
     const currentRoundQuestions = questionBank.filter(
       (question) => question.bin_id === questionBinNum
     );
