@@ -11,10 +11,19 @@ function Results() {
   const { state } = useLocation();
   const MAX_SCORE = 5;
 
-  const handleShare = () => {
-    let resultToShare = `I scored ${state.score}/${MAX_SCORE} in Scam or Not. Beat me at recognising scams at https://go.gov.sg/scam-or-not.`;
-    navigator.clipboard.writeText(resultToShare);
-    toast.success("Results copied to clipboard!");
+  const handleShare = async () => {
+    const shareData = {
+      title: "Scam or Not",
+      text: `I scored ${state.score}/${MAX_SCORE} in Scam or Not. Beat me at recognising scams!`,
+      url: "https://go.gov.sg/scam-or-not",
+    };
+    try {
+      await navigator.share(shareData);
+    } catch (err) {
+      let resultToShare = `I scored ${state.score}/${MAX_SCORE} in Scam or Not. Beat me at recognising scams at https://go.gov.sg/scam-or-not.`;
+      navigator.clipboard.writeText(resultToShare);
+      toast.success("Results copied to clipboard!");
+    }
   }
 
   return (
