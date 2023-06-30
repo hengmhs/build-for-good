@@ -6,9 +6,6 @@ import { Fireworks } from "fireworks/lib/react";
 import { useState, useRef, useEffect } from "react";
 import CategoryTag from "../CategoryTag/CategoryTag";
 
-//import { database } from "../../firebase";
-//import { ref, onValue } from "firebase/database";
-
 export default function ScamModal({
   closeModal,
   result,
