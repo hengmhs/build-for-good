@@ -8,17 +8,33 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # About
 
-This project was built for the Open Government Product's 2023 Build-for-Good Hackathon. Build for Good was a month-long hackathon organised by Open Government Products for citizens to build solutions that tackle various problems in Singapore. 
+This project was built for the Open Government Product's 2023 Build-for-Good Hackathon. Build for Good was a month-long hackathon organised by Open Government Products for citizens to build solutions that tackle various problems in Singapore.
 
-In this game, players have to decide if a message they received is a scam or not. These messages were adapted from real life scam messages and promotional messages that our team received.
+In this game, players have to decide if a message they received is a scam or not. These messages were adapted from real life scam messages and promotional messages that our team received. We wanted to create a quick and easy mobile-first game that could be played within 5 minutes.
 
-They get points for correctly categorising the message.
+![question screen](/src/Screenshots/screenshot1.png)
+
+They get points for correctly categorising the message and tips on how to spot scams.
+
+![correct screen](/src/Screenshots/screenshot2.png)
+
+If players get it wrong, they are notified of the type of scam they fell for, how to identify these scams, and the consequences of the scam.
+
+![wrong screen](/src/Screenshots/screenshot3.png)
+
+Finally, players can share the link to the game with their friends and family.
+
+![share](/src/Screenshots/screenshot4.png)
 
 # Team
 
+[Yabing](https://github.com/peanutyabing)
+[Ted](https://github.com/Drenmi)
+[Michael](https://github.com/TheConfusedDuck)
+[Mark](https://github.com/markcwy-ra)
+[Sean](https://github.com/hengmhs)
 
-
-## Available Scripts
+# Available Scripts
 
 In the project directory, you can run:
 
@@ -34,4 +50,3 @@ You may also see any lint errors in the console.
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
