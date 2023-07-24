@@ -4,7 +4,7 @@ import { database } from "../firebase";
 import { ref, onValue, get, child } from "firebase/database";
 
 export default function useQuestionBank() {
-  const { questionBank, setQuestionBank, setQuestionID } =
+  const { questionBank, setQuestionBank, setQuestionID, setBinArray } =
     useContext(QuestionBankContext);
 
   useEffect(() => {
@@ -15,6 +15,13 @@ export default function useQuestionBank() {
         .then((snapshot) => {
           if (snapshot.exists()) {
             const data = snapshot.val();
+
+            const len = Object.keys(data).length;
+            const binAmt = Math.ceil(len / 5);
+            const arr = Array(binAmt)
+              .fill()
+              .map((_, i) => i + 1);
+            setBinArray(arr);
 
             for (const [key, value] of Object.entries(data)) {
               setQuestionBank((prev) => [...prev, value]);

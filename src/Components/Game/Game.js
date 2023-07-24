@@ -8,12 +8,15 @@ import "./Game.css";
 import ScamModal from "./ScamModal";
 import Header from "../Header/Header";
 import { updateCount } from "../../Backend/updateCount";
+import duolingoCorrect from "../../Audio/duolingo-correct.mp3";
+import duolingoIncorrect from "../../Audio/duolingo-wrong.mp3";
 
 export default function Game() {
   const navigate = useNavigate();
-  const { questionBank, questionID } = useQuestionBank();
+  const { questionBank, questionID, binArray, remainBins, setRemainBin } =
+    useQuestionBank();
   const { hints } = useHints();
-  const [roundNumber, setRoundNumber] = useState(1);
+  const [questionBinNum, setQuestionBinNum] = useState();
   const [questionIndex, setQuestionIndex] = useState(0);
   const [roundQuestions, setRoundQuestions] = useState([]);
   const [score, setScore] = useState(0);
@@ -23,18 +26,37 @@ export default function Game() {
   const [isModalOpen, setModal] = useState(false);
   const [result, setResult] = useState("");
 
+  const correctAudio = new Audio(duolingoCorrect);
+  const incorrectAudio = new Audio(duolingoIncorrect);
+
+  useEffect(() => {
+    if (binArray.length === 0) {
+      return;
+    }
+
+    let arr = remainBins.length === 0 ? [...binArray] : [...remainBins];
+
+    const randIndex = Math.floor(Math.random() * arr.length);
+    const curr_bin_id = arr[randIndex];
+    arr.splice(randIndex, 1);
+
+    setQuestionBinNum(curr_bin_id);
+    setRemainBin(arr);
+  }, [questionBank]);
+
   useEffect(() => {
     if (!questionBank || questionBank.length === 0) {
       return;
     }
+
     const currentRoundQuestions = questionBank.filter(
-      (question) => question.bin_id === roundNumber
+      (question) => question.bin_id === questionBinNum
     );
 
-    const questionKey = questionID[roundNumber];
+    const questionKey = questionID[questionBinNum];
     setQuestionIDs(questionKey);
     setRoundQuestions(currentRoundQuestions);
-  }, [roundNumber, questionBank]);
+  }, [questionBinNum, questionBank]);
 
   const setModalClose = () => {
     setModal(false);
@@ -62,7 +84,9 @@ export default function Game() {
       setScore(score + 1);
       setResult("correct");
       updateCount(key, true);
+      correctAudio.play();
     } else {
+      incorrectAudio.play();
       setResult(`${answer} is incorrect`);
       updateCount(key, false);
     }
